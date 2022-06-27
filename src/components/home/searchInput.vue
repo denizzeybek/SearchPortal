@@ -1,0 +1,85 @@
+<template>
+  <div class="search-section">
+    <div class="search-content">
+      <div class="search-input">
+        <img src="@/assets/images/search.png" class="search-img" />
+        <input
+          @keyup="onTyping"
+          v-model="searchText"
+          class="form-control"
+          type="text"
+        />
+      </div>
+      <custom-button @click="onTyping" class="btn-search" buttonText="Search" />
+    </div>
+  </div>
+</template>
+
+<script>
+import customButton from "@/components/button/button.vue";
+export default {
+  components: {
+    customButton,
+  },
+  created() {
+    this.$store.dispatch("getDataAction");
+  },
+  data() {
+    return {
+      show: false,
+      searchText: "",
+    };
+  },
+  methods: {
+    onTyping() {
+      this.show = true;
+      if (this.searchText === "") {
+        this.show = false;
+      }
+      this.$store.dispatch("setTypeListAction", this.searchText);
+      // action işlemini gerçekleştir, search et ve listeye dön
+    },
+  }, 
+};
+</script>
+
+<style scoped lang="scss">
+.search-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .search-content {
+    display: flex;
+    align-items: center;
+    margin-left: 210px;
+    margin-top: 10px;
+    .search-input {
+      .form-control {
+        background: #ffffff;
+        border: 2px solid #204080;
+        border-radius: 8px;
+        width: 654px;
+        height: 48px;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        color: #090a0a;
+        line-height: 16px;
+        padding-left: 40px;
+      }
+      .search-img {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        bottom: -7px;
+        left: 35px;
+      }
+    }
+    .btn-search {
+      margin-left: 10px;
+    }
+  }
+}
+</style>

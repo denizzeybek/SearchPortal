@@ -1,17 +1,31 @@
 <template>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <navigation-bar />
+    <logo />
+    <search />
+    <news />
+    <maps />
+  </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import customButton from "@/components/button/button.vue";
+import logo from "@/components/home/logo.vue";
+import navigationBar from "@/components/home/navigationBar.vue";
+import search from "@/components/home/search.vue";
+import news from "@/components/home/news.vue";
+import maps from "@/components/home/maps.vue";
 
 export default {
   components: {
-    HelloWorld
-  }
-}
+    customButton,
+    logo,
+    navigationBar,
+    search,
+    news,
+    maps,
+  },
+};
 </script>
 
-<style>
-
-</style>
+ 
