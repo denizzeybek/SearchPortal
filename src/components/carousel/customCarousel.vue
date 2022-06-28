@@ -4,7 +4,10 @@
       <div class="inner" ref="inner" :style="innerStyles">
         <div class="card" v-for="card in cards.slice(0, 3)" :key="card.id">
           <div class="card-content">
-            <img :src="card.img" />
+            <!-- <img :src="card.img" /> -->
+            <!-- <img :src="`/img/image${card.id}.png`" /> -->
+            <img :src="getImgUrl(card.img2)" v-bind:alt="card.img2" />
+            <!-- <img :src="card.img2" /> -->
             <div class="card-body">
               <span class="card-header">{{ card.headerText }} </span>
               <span class="card-header">{{ card.bodyText }} </span>
@@ -34,6 +37,7 @@ export default {
           headerText: "A Plan to Rebuild Bus Terminal ",
           bodyText: "Eveyone Loves to Hate",
           contentText: "1h ago bt Troy Corison",
+          img2: "image1",
         },
         {
           id: 2,
@@ -41,6 +45,7 @@ export default {
           headerText: "A Plan to Rebuild Bus Terminal ",
           bodyText: "Eveyone Loves to Hate",
           contentText: "2h ago bt Troy Corison",
+          img2: "image2",
         },
         {
           id: 3,
@@ -48,6 +53,7 @@ export default {
           headerText: "A Plan to Rebuild Bus Terminal ",
           bodyText: "Eveyone Loves to Hate",
           contentText: "3h ago bt Troy Corison",
+          img2: "image3",
         },
         {
           id: 4,
@@ -55,6 +61,7 @@ export default {
           headerText: "A Plan to Rebuild Bus Terminal ",
           bodyText: "Eveyone Loves to Hate",
           contentText: "4h ago bt Troy Corison",
+          img2: "image4",
         },
         {
           id: 5,
@@ -62,6 +69,7 @@ export default {
           headerText: "A Plan to Rebuild Bus Terminal ",
           bodyText: "Eveyone Loves to Hate",
           contentText: "5h ago bt Troy Corison",
+          img2: "image5",
         },
       ],
       innerStyles: {},
@@ -69,12 +77,10 @@ export default {
       transitioning: false,
     };
   },
-
   mounted() {
     this.setStep();
     this.resetTranslate();
   },
-
   methods: {
     setStep() {
       const innerWidth = this.$refs.inner.scrollWidth;
@@ -139,6 +145,10 @@ export default {
         transition: "none",
         transform: `translateX(-${this.step})`,
       };
+    },
+    getImgUrl(pet) {
+      var images = require.context("@/assets/images/", false, /\.jpeg$/);
+      return images("./" + pet + ".jpeg");
     },
   },
 };
@@ -237,24 +247,27 @@ export default {
   .btn-prev {
     position: absolute;
     left: 10px;
-    top: 75px;
-    img {
-      margin-left: 5px;
-    }
+    top: 90px;
   }
   .btn-next {
     position: absolute;
     right: 130px;
-    top: 75px;
-    img {
-      margin-right: 5px;
-    }
+    top: 90px;
   }
 }
 @media only screen and (max-width: 1281px) {
   .btn-next {
     position: absolute;
     right: -10px !important;
+  }
+  .carousel-outer {
+    margin-left: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 1441px) {
+  .carousel-outer {
+    margin-left: 100px;
   }
 }
 /* optional */

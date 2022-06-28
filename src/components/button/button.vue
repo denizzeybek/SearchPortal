@@ -6,6 +6,7 @@
       :class="{ btnSubmit: isSubmit, btnMore: !isSubmit }"
       type="button"
       :disabled="disabledProp == 1"
+      :style="{marginTop:marginTop}"
     >
       {{ buttonText }}
     </button>
@@ -27,6 +28,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    marginTop:{
+      type: String,
+      default: () => "0px",
+    }
   },
 };
 </script>

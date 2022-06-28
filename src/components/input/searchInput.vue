@@ -1,20 +1,22 @@
 <template>
   <div class="search-section">
-    <div class="search-content">
+    <div class="search-content" :style="{marginLeft:contentMargin}">
       <div class="search-input">
-        <img src="@/assets/images/search.png" class="search-img" />
+        <img :style="{bottom:imgBottom, left:imgLeft}" src="@/assets/images/search.png" class="search-img" />
         <input
           @keyup="onTyping"
           v-model="searchText"
           class="form-control"
+          :style="{ width: widthInput }"
           type="text"
         />
       </div>
       <custom-button
         @clickBtn="$router.push('/search-view')"
         class="btn-search"
-        buttonText="Search" 
-        :disabledProp="searchText.length>1 && getTypeList.length > 0 ? false : true"
+        buttonText="Search"
+        :style="{ marginTop: marginTop }"
+        :disabledProp="searchText.length > 1 && getTypeList.length > 0 ? false : true"
       />
     </div>
   </div>
@@ -23,7 +25,30 @@
 <script>
 import { mapGetters } from "vuex";
 import customButton from "@/components/button/button.vue";
+
 export default {
+  props: {
+    widthInput: {
+      type: String,
+      default: () => "654px",
+    },
+    marginTop: {
+      type: String,
+      default: () => "0px",
+    },
+    imgBottom:{
+      type: String,
+      default: () => "-6px",
+    },
+    imgLeft:{
+      type: String,
+      default: () => "35px",
+    },
+    contentMargin:{
+      type: String,
+      default: () => "210px",
+    },
+  },
   components: {
     customButton,
   },
@@ -49,7 +74,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .search-section {
   width: 100%;
   display: flex;
@@ -58,14 +83,14 @@ export default {
   .search-content {
     display: flex;
     align-items: center;
-    margin-left: 210px;
+    // margin-left: 210px;
     margin-top: 10px;
     .search-input {
       .form-control {
         background: #ffffff;
         border: 2px solid #204080;
         border-radius: 8px;
-        width: 654px;
+        // width: 654px;
         height: 48px;
         font-family: "Inter";
         font-style: normal;
@@ -79,8 +104,8 @@ export default {
         width: 24px;
         height: 24px;
         position: relative;
-        bottom: -7px;
-        left: 35px;
+        // bottom: -7px;
+        // left: 35px;
       }
     }
     .btn-search {

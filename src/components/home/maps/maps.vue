@@ -14,12 +14,19 @@
       </div>
 
       <div class="real-map">
-        <span class="">sdfsdfsdf</span>
+          <map-geo/>
       </div>
     </div>
 </template>
 
- 
+<script>
+import mapGeo from '@/components/home/maps/mapGeo.vue'
+export default{
+  components:{
+    mapGeo
+  },
+}
+</script>
 
 <style scoped lang="scss">
 .maps-section {
@@ -63,7 +70,7 @@
     margin-right: 55px;
     width: 470px;
     height: 222px;
-    background: red;
+    margin-bottom: 30px;
   }
 }
 </style>

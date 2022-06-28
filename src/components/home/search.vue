@@ -38,7 +38,7 @@
 
 <script>
 import customButton from "@/components/button/button.vue";
-import searchInput from "@/components/home/searchInput.vue";
+import searchInput from "@/components/input/searchInput.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {

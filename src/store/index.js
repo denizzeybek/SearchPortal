@@ -12,6 +12,9 @@ export default new Vuex.Store({
     getTypeList(state) {
       return state.typeList;
     },
+    getUserData(state){
+      return state.userData
+    }
   },
   mutations: {
     setMutateHandler(state, input) {
