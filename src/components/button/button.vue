@@ -4,8 +4,8 @@
       @click="$emit('clickBtn')"
       class="btn"
       :class="{ btnSubmit: isSubmit, btnMore: !isSubmit }"
-      href="#"
       type="button"
+      :disabled="disabledProp == 1"
     >
       {{ buttonText }}
     </button>
@@ -18,10 +18,14 @@ export default {
     buttonText: {
       type: String,
       default: () => "Add New Record",
-    }, 
+    },
     isSubmit: {
       type: Boolean,
       default: true,
+    },
+    disabledProp: {
+      type: Boolean,
+      default: false,
     },
   },
 };
@@ -59,5 +63,11 @@ export default {
   color: #090a0a;
   background: none;
   border: none;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
 </style>

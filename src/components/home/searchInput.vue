@@ -10,19 +10,22 @@
           type="text"
         />
       </div>
-      <custom-button @click="onTyping" class="btn-search" buttonText="Search" />
+      <custom-button
+        @clickBtn="$router.push('/search-view')"
+        class="btn-search"
+        buttonText="Search" 
+        :disabledProp="searchText.length>1 && getTypeList.length > 0 ? false : true"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import customButton from "@/components/button/button.vue";
 export default {
   components: {
     customButton,
-  },
-  created() {
-    this.$store.dispatch("getDataAction");
   },
   data() {
     return {
@@ -39,7 +42,10 @@ export default {
       this.$store.dispatch("setTypeListAction", this.searchText);
       // action işlemini gerçekleştir, search et ve listeye dön
     },
-  }, 
+  },
+  computed: {
+    ...mapGetters(["getTypeList"]),
+  },
 };
 </script>
 

@@ -4,46 +4,33 @@
       <span>Find in records</span>
     </div>
 
-    <div class="search-content">
-      <div class="search-input">
-        <img src="@/assets/images/search.png" class="search-img" />
-        <input
-          @keyup="onTyping"
-          v-model="searchText"
-          class="form-control"
-          type="text"
-        />
-      </div>
-      <custom-button @click="onTyping" class="btn-search" buttonText="Search" />
-    </div>
+    <search-input />
 
-    <div >
-      <div v-if="getTypeList.length > 0 ? true : false" class="search-list">
-        <div v-for="index in getTypeList.slice(0, 3)" :key="index.id" class="search-row">
-          <div class="row-icon">
-            <img
-              src="@/assets/images/Vector.png"
-              class="search-"
-              alt="vector"
-            />
+    <div v-if="getTypeList.length > 0 ? true : false" class="search-list">
+      <div
+        v-for="index in getTypeList.slice(0, 3)"
+        :key="index.id"
+        class="search-row"
+      >
+        <div class="row-icon">
+          <img src="@/assets/images/Vector.png" class="search-" alt="vector" />
+        </div>
+        <div class="row-content">
+          <div class="row-text">
+            <span>{{ index.NameSurname }} </span>
           </div>
-          <div class="row-content">
-            <div class="row-text">
-              <span>{{ index.NameSurname }} </span>
-            </div>
-            <div class="row-detail">
-              <span>{{ index.Company }} </span>
-            </div>
+          <div class="row-detail">
+            <span>{{ index.Company }} </span>
           </div>
         </div>
-        <div class="load-more">
-          <custom-button
-            :isSubmit="false"
-            class="btn-more"
-            buttonText="Show more..."
-            @clickBtn="$router.push('/search-view')"
-          />
-        </div>
+      </div>
+      <div class="load-more">
+        <custom-button
+          :isSubmit="false"
+          class="btn-more"
+          buttonText="Show more..."
+          @clickBtn="$router.push('/search-view')"
+        />
       </div>
     </div>
   </div>
@@ -51,29 +38,19 @@
 
 <script>
 import customButton from "@/components/button/button.vue";
+import searchInput from "@/components/home/searchInput.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
     customButton,
+    searchInput,
   },
   created() {
+    localStorage.removeItem("inputData");
     this.$store.dispatch("getDataAction");
   },
   data() {
-    return {
-      show: false,
-      searchText: "",
-    };
-  },
-  methods: {
-    onTyping() {
-      this.show = true;
-      if (this.searchText === "") {
-        this.show = false;
-      }
-      this.$store.dispatch("setTypeListAction", this.searchText);
-      // action işlemini gerçekleştir, search et ve listeye dön
-    },
+    return {};
   },
   computed: {
     ...mapGetters(["getTypeList"]),
@@ -98,39 +75,6 @@ export default {
       font-size: 32px;
       line-height: 36px;
       color: #090a0a;
-    }
-  }
-
-  .search-content {
-    display: flex;
-    align-items: center;
-    margin-left: 210px;
-    margin-top: 10px;
-    .search-input {
-      .form-control {
-        background: #ffffff;
-        border: 2px solid #204080;
-        border-radius: 8px;
-        width: 654px;
-        height: 48px;
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        color: #090a0a;
-        line-height: 16px;
-        padding-left: 40px;
-      }
-      .search-img {
-        width: 24px;
-        height: 24px;
-        position: relative;
-        bottom: -7px;
-        left: 35px;
-      }
-    }
-    .btn-search {
-      margin-left: 10px;
     }
   }
 

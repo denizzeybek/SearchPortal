@@ -4,11 +4,20 @@
       <span>Top News</span>
     </div>
 
-    <div class="news-carousel"></div>
+    <div class="news-carousel">
+      <custom-carousel/>
+    </div>
   </div>
 </template>
 
- 
+ <script>
+ import customCarousel from '@/components/carousel/customCarousel.vue'
+ export default{
+  components:{
+    customCarousel
+  }
+ }
+ </script>
 
 <style scoped lang="scss">
 .news-section {
@@ -28,8 +37,10 @@
   }
   .news-carousel {
     width: 100%;
-    background-color: antiquewhite;
+    // background-color: antiquewhite;
     height: 385px;
+    display:flex;
+    justify-content: center;
   }
 }
 

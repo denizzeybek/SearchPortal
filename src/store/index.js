@@ -21,7 +21,8 @@ export default new Vuex.Store({
     },
     setTypeList(state, data) {
       state.typeList = [];
-      if (data !== "") {
+      localStorage.removeItem("inputData")
+      if (data.length > 1) {
         let arr = state.userData;
         arr = arr.map(function (a) {
           a.NameSurname = a.NameSurname.toLowerCase();
