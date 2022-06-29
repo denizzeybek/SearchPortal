@@ -33,7 +33,7 @@
                   <span>{{ transaction.Country }} </span>
                 </div>
                 <div class="row-detail">
-                  <span>{{ transaction.Date }} </span>
+                  <span>{{ transaction.DateData }} </span>
                 </div>
               </div>
             </div>
@@ -56,7 +56,7 @@
 
       <li class="pagination-item" title="pagination">
         <button
-          type="button"
+          type="button btn-next"
           @click="onClickPreviousPage"
           :disabled="isInFirstPage"
         >
@@ -75,8 +75,8 @@
         </button>
       </li>
 
-      <li class="pagination-item" title="Следующая страница">
-        <button type="button" @click="onClickNextPage" :disabled="isInLastPage">
+      <li class="pagination-item" title="pagination">
+        <button type="button btn-next" style="width:85px;" @click="onClickNextPage" :disabled="isInLastPage">
           <i>Next</i>
         </button>
       </li>
@@ -222,6 +222,9 @@ h2 {
     // margin-top:75px;
   }
   .pagination-item {
+    .btn-next{
+      min-width:85px;
+    }
     button {
       padding: 0.25rem 0.5rem;
       font-size: 1.1rem;
@@ -231,6 +234,7 @@ h2 {
       margin-right: 10px;
       
     }
+    
     &:hover {
       cursor: pointer;
     }
@@ -241,7 +245,6 @@ h2 {
       &:hover {
         cursor: default;
         background-color: transparent;
-
       }
     }
     &.active {
