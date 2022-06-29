@@ -18,16 +18,16 @@ function sortData(arr, prop) {
 
 function convertTimeSpan(bigData) {
   bigData.map((a) => {
-    let date = new Date(a.DateData);
+    let date = new Date(a.Date);
     let timeSpan = date.getTime();
-    a.DateData = timeSpan;
+    a.Date = timeSpan;
   });
   return bigData;
 }
 
 function convertTime(bigData) {
   bigData.map((a) => {
-    let date = new Date(a.DateData);
+    let date = new Date(a.Date);
     let converted =
       (date.getMonth() > 8
         ? date.getMonth() + 1
@@ -36,7 +36,7 @@ function convertTime(bigData) {
       (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
       "/" +
       date.getFullYear();
-    a.DateData = converted;
+    a.Date = converted;
   });
   return bigData;
 }
@@ -76,34 +76,33 @@ export default new Vuex.Store({
         state.typeList = res;
         localStorage.setItem("inputData", data);
       } else {
+        console.log("here")
         state.typeList = state.userData;
       }
     },
     setSortedList(state, data) {
-      let bigData = state.userData;
-      let typeData = state.typeList;
+      let bigData = state.typeList;
       let newArr = [];
 
       switch (data) {
         case "nameAscending":
           // console.log("bigData ", bigData);
           newArr = sortData(bigData, "NameSurname");
-          state.userData = newArr;
+          state.typeList = newArr;
           break;
         case "nameDescending":
           newArr = sortData(bigData, "NameSurname");
-          state.userData = newArr.reverse();
+          state.typeList = newArr.reverse();
 
           break;
-        case "yearAscending": { 
+        case "yearAscending":
           bigData = convertTimeSpan(bigData);
-          bigData = sortData(bigData, "DateData");
-          bigData = convertTime(bigData); 
+          bigData = sortData(bigData, "Date");
+          bigData = convertTime(bigData);
           break;
-        }
         case "yearDescending":
           bigData = convertTimeSpan(bigData);
-          bigData = sortData(bigData, "DateData");
+          bigData = sortData(bigData, "Date");
           bigData = convertTime(bigData).reverse();
           break;
         default:
@@ -120,7 +119,7 @@ export default new Vuex.Store({
 
       if (result) {
         result = result.map((a) => {
-          let oldDate = a.DateData;
+          let oldDate = a.Date;
           let arr = oldDate.split("/");
           let month = arr[1];
           let day = arr[0];
@@ -128,8 +127,8 @@ export default new Vuex.Store({
           let newArr = [];
           newArr.push(month, day, year);
           let newDate = newArr.join("/");
-          // a.DateData = new Date(newDate);
-          a.DateData = newDate;
+          // a.Date = new Date(newDate);
+          a.Date = newDate;
           //TODO:: burda sıkıntı var
           return a;
         });
