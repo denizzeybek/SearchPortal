@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="search-general">
-      <div class="logo-section">
+      <div class="logo-section" @click="$router.push('/')">
         <img src="@/assets/images/logo.png" alt="" />
       </div>
       <div class="search-era">
@@ -10,7 +10,8 @@
           imgBottom="-42px"
           widthInput="509px"
           marginTop="25px"
-          contentMargin="-70px"
+          contentMargin="0px"
+          searchBtnWidth="138px"
         />
       </div>
       <div class="record-era">
@@ -21,23 +22,9 @@
         />
       </div>
     </nav>
-    <div class="search-results">
-      <div class="result-content">
-        <div class="search-row">
-          <div class="search-row-content"></div>
-        </div>
-        <div class="search-row">
-          <div class="search-row-content"></div>
-        </div>
-        <div class="search-row">
-          <div class="search-row-content"></div>
-        </div>
-        <div class="search-row">
-          <div class="search-row-content"></div>
-        </div>
-      </div>
-      <div class="result-order"></div>
-    </div>
+
+    <pagination />
+
   </div>
 </template>
 
@@ -50,6 +37,9 @@ export default {
     pagination,
     customButton,
     searchInput,
+  },
+  created() {
+    this.$store.dispatch("getDataAction");
   },
 };
 </script>
@@ -67,6 +57,7 @@ export default {
   margin-top: 12px;
   width: 100vw;
   .logo-section {
+    cursor: pointer;
     margin-left: 30px;
     img {
       width: 149px;
@@ -83,35 +74,35 @@ export default {
     margin-bottom: 5px;
   }
 }
-.search-results {
-  display: flex;
-  justify-content: center;
-  .result-content {
-    max-width: 726px;
-    width: 100%;
-    height: 480px;
-    // background-color: antiquewhite;
+// .search-results {
+//   display: flex;
+//   justify-content: center;
+//   .result-content {
+//     max-width: 726px;
+//     width: 100%;
+//     height: 480px;
+//     // background-color: antiquewhite;
 
-    .search-row {
-      max-width: 726px;
-      width: 100%;
-      height: 88px;
-      // background-color: aquamarine;
-      border-bottom: 1px solid #7e7e7e;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      .search-row-content {
-        margin-bottom: 10px;
-        width: 100%;
-        height: 78px;
-        &:hover {
-          background: rgba(79, 117, 194, 0.21);
-          border-radius: 8px;
-        }
-      }
-    }
-  }
-}
+//     .search-row {
+//       max-width: 726px;
+//       width: 100%;
+//       height: 88px;
+//       // background-color: aquamarine;
+//       border-bottom: 1px solid #7e7e7e;
+//       margin-top: 10px;
+//       margin-bottom: 10px;
+//       .search-row-content {
+//         margin-bottom: 10px;
+//         width: 100%;
+//         height: 78px;
+//         &:hover {
+//           background: rgba(79, 117, 194, 0.21);
+//           border-radius: 8px;
+//         }
+//       }
+//     }
+//   }
+// }
 .search-input {
   margin-bottom: 50px;
 }

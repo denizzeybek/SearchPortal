@@ -23,7 +23,7 @@ export default new Vuex.Store({
       state[type] = response;
     },
     setTypeList(state, data) {
-      state.typeList = [];
+      // state.typeList = [];
       localStorage.removeItem("inputData")
       if (data.length > 1) {
         let arr = state.userData;
@@ -37,6 +37,9 @@ export default new Vuex.Store({
         });
         state.typeList = res;
         localStorage.setItem("inputData", data)
+      }
+      else{
+        state.typeList=state.userData
       }
 
     },
@@ -53,10 +56,16 @@ export default new Vuex.Store({
           response: result,
           type: "userData",
         };
+        let input2 = {
+          response: result,
+          type: "typeList",
+        };
         commit("setMutateHandler", input);
+        commit("setMutateHandler", input2);
       }
     },
     setTypeListAction({ commit }, data) {
+      console.log("action ", data)
       commit("setTypeList", data);
     },
   },

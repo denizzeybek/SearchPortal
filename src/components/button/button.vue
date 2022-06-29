@@ -6,7 +6,7 @@
       :class="{ btnSubmit: isSubmit, btnMore: !isSubmit }"
       type="button"
       :disabled="disabledProp == 1"
-      :style="{marginTop:marginTop}"
+      :style="{marginTop:marginTop, width:btnWidth}"
     >
       {{ buttonText }}
     </button>
@@ -31,6 +31,10 @@ export default {
     marginTop:{
       type: String,
       default: () => "0px",
+    },
+    btnWidth:{
+      type: String,
+      default: () => "200px",
     }
   },
 };
@@ -41,8 +45,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 46px;
-  width: 200px;
+  height: 46px; 
   cursor: pointer;
 }
 .btnSubmit {

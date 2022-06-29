@@ -4,9 +4,9 @@
       <span>Find in records</span>
     </div>
 
-    <search-input />
+    <search-input @inputText="setInputText"/>
 
-    <div v-if="getTypeList.length > 0 ? true : false" class="search-list">
+    <div v-if="(getTypeList.length > 1 ? true : false) && (inputText != '') && (inputText.length > 1)" class="search-list">
       <div
         v-for="index in getTypeList.slice(0, 3)"
         :key="index.id"
@@ -50,7 +50,14 @@ export default {
     this.$store.dispatch("getDataAction");
   },
   data() {
-    return {};
+    return {
+      inputText:''
+    };
+  },
+  methods:{
+    setInputText(event){
+      this.inputText = event
+    }
   },
   computed: {
     ...mapGetters(["getTypeList"]),

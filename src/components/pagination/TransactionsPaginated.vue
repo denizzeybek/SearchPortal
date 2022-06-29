@@ -1,55 +1,66 @@
 <template>
   <div class="transactions">
-    <h2>Transactions</h2>
-    <div class="head">
-      <div class="row">
-        <div class="col">id</div>
-        <div class="col">date</div>
-        <div class="col">amount</div>
-        <div class="col">type</div>
-      </div>
-    </div>
-    <hr />
-    <div class="items">
-      <div
-        class="row"
-        v-for="(transaction, index) in paginatedData"
-        :key="index"
-      >
-        <div class="col">{{ transaction.City }}</div>
-        <div class="col">{{ transaction.Company }}</div>
-        <div class="col">${{ transaction.Country }}</div>
-        <div class="col" v-if="transaction.Date">
-          <span style="color: green">{{ transaction.Email }}</span>
-        </div>
-        <div class="col" v-if="transaction.type === 'error'">
-          <span style="color: red">{{ transaction.type }}</span>
-        </div>
-        <div class="col" v-if="transaction.type === 'processing'">
-          <span style="color: silver">{{ transaction.type }}</span>
-        </div>
-      </div>
-    </div>
+    <div class="search-results">
+      <div class="result-content">
+        <div
+          v-for="(transaction, index) in paginatedData"
+          :key="index"
+          class="search-row"
+        >
+          <div class="search-row-content">
+            <div class="row-left">
+              <div class="row-icon">
+                <img
+                  src="@/assets/images/Vector.png"
+                  class="search-"
+                  alt="vector"
+                />
+              </div>
+              <div class="row-content">
+                <div class="row-text">
+                  <span class="text-span">{{ transaction.NameSurname }} </span>
+                </div>
 
+                <div class="row-detail">
+                  <span class="detail-span">{{ transaction.Company }} </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-right">
+              <div class="date-content">
+                <div class="row-text">
+                  <span>{{ transaction.Country }} </span>
+                </div>
+                <div class="row-detail">
+                  <span>{{ transaction.Date }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="result-order"></div>
+    </div>
+    <!--#region pagination count -->
     <ul class="pagination" v-if="data.length > 5 || currentPage > 1">
-      <li class="pagination-item" title="Первая страница">
+      <!-- <li class="pagination-item" title="Первая страница">
         <button
           type="button"
           @click="onClickFirstPage"
           :disabled="isInFirstPage"
         >
-          <i class="fas fa-chevron-left"></i>
-          <i class="fas fa-chevron-left"></i>
+          <i>First</i>
         </button>
-      </li>
+      </li> -->
 
-      <li class="pagination-item" title="Предыдущая страница">
+      <li class="pagination-item" title="pagination">
         <button
           type="button"
           @click="onClickPreviousPage"
           :disabled="isInFirstPage"
         >
-          <i class="fas fa-chevron-left"></i>
+          <i>Previous</i>
         </button>
       </li>
 
@@ -66,16 +77,16 @@
 
       <li class="pagination-item" title="Следующая страница">
         <button type="button" @click="onClickNextPage" :disabled="isInLastPage">
-          <i class="fas fa-chevron-right"></i>
+          <i>Next</i>
         </button>
       </li>
-      <li class="pagination-item" title="Последняя страница">
+      <!-- <li class="pagination-item" title="Последняя страница">
         <button type="button" @click="onClickLastPage" :disabled="isInLastPage">
-          <i class="fas fa-chevron-right"></i>
-          <i class="fas fa-chevron-right"></i>
+          <i>Last</i>
         </button>
-      </li>
+      </li> -->
     </ul>
+    <!--#endregion pagination count -->
   </div>
 </template>
 
@@ -149,10 +160,7 @@ export default {
       return this.currentPage === this.totalPages;
     },
   },
-  created() {
-    console.log("prop ");
-    console.log("prop ", this.$props.currentPage);
-  },
+  created() {},
   methods: {
     onClickFirstPage() {
       this.$emit("pagechanged", 1);
@@ -178,3 +186,169 @@ export default {
   },
 };
 </script>
+
+
+<style scoped lang="scss">
+hr {
+  border: 1px solid silver;
+  width: 100%;
+}
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 0;
+}
+.transactions {
+  display: flex;
+  height: calc(100% - 1.25rem);
+  flex-direction: column;
+  .row {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0.75rem 0;
+  }
+  .col {
+    justify-content: center;
+    flex-basis: 25%;
+    display: inline-flex;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 105px 0 0 0;
+    list-style-type: none;
+    // margin-top:75px;
+  }
+  .pagination-item {
+    button {
+      padding: 0.25rem 0.5rem;
+      font-size: 1.1rem;
+      background: #ffffff;
+      border: 1px solid #484848;
+      border-radius: 4px;
+      margin-right: 10px;
+      
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &[disabled="disabled"] {
+      color: silver;
+      cursor: default;
+      background-color: blue;
+      &:hover {
+        cursor: default;
+        background-color: transparent;
+
+      }
+    }
+    &.active {
+      color: red;
+    }
+    .active{
+        background:#204080;
+        color:white;
+      }
+  }
+}
+
+.search-results {
+  display: flex;
+  justify-content: center;
+  .result-content {
+    max-width: 726px;
+    width: 100%;
+    height: 480px;
+    // background-color: antiquewhite;
+
+    .search-row {
+      max-width: 726px;
+      width: 100%;
+      height: 88px;
+      // background-color: aquamarine;
+      border-bottom: 1px solid #7e7e7e;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .search-row-content {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 78px;
+        display: flex;
+        padding-left: 27px;
+        padding-right: 12px;
+        justify-content: space-between;
+        &:hover {
+          background: rgba(79, 117, 194, 0.21);
+          border-radius: 8px;
+        }
+        .row-left {
+          display: flex;
+          align-items: center;
+          .row-icon {
+            img {
+              margin-right: 15px;
+              width: 18px;
+              height: 22px;
+            }
+          }
+          .row-content {
+            .row-text {
+              span {
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                color: #090a0a;
+              }
+            }
+            .row-detail {
+              span {
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 16px;
+                color: #72777a;
+              }
+            }
+          }
+        }
+
+        .row-right {
+          display: flex;
+          align-items: center;
+          .date-content {
+            .row-text {
+              text-align: end;
+              span {
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                color: #484848;
+              }
+            }
+            .row-detail {
+              text-align: end;
+              span {
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 16px;
+                color: #484848;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="logo-section">
+  <div class="logo-section" >
     <img class="logo-img" src="@/assets/images/logo.png" />
     <p class="logo-text">Search app</p>
   </div>

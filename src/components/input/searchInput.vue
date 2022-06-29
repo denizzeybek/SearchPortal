@@ -11,12 +11,22 @@
           type="text"
         />
       </div>
-      <custom-button
-        @clickBtn="$router.push('/search-view')"
+      <!-- <custom-button
+        @clickBtn="onEnter"
         class="btn-search"
         buttonText="Search"
+        :btnWidth="searchBtnWidth"
         :style="{ marginTop: marginTop }"
-        :disabledProp="searchText.length > 1 && getTypeList.length > 0 ? false : true"
+        :disabledProp="(searchText.length != '') && (searchText.length > 1) && (getTypeList.length > 0 ? false : true)"
+
+      /> -->
+      <custom-button
+        @clickBtn="onEnter"
+        class="btn-search"
+        buttonText="Search"
+        :btnWidth="searchBtnWidth"
+        :style="{ marginTop: marginTop }"
+        :disabledProp=" (searchText.length > 1 ? false : true)"
       />
     </div>
   </div>
@@ -48,9 +58,22 @@ export default {
       type: String,
       default: () => "210px",
     },
+    searchBtnWidth:{
+      type: String,
+      default: () => "200px",
+    }
   },
   components: {
     customButton,
+  },
+  async mounted(){
+    await this.$store.dispatch("getDataAction");
+    let stored = localStorage.getItem('inputData') 
+    if(stored != null){
+      this.searchText = stored
+      this.$store.dispatch("setTypeListAction", this.searchText);
+      this.$emit('inputText', this.searchText)
+    }
   },
   data() {
     return {
@@ -60,13 +83,28 @@ export default {
   },
   methods: {
     onTyping() {
-      this.show = true;
+      if(this.searchText.length > 2){
+        this.show = true;
+      }
       if (this.searchText === "") {
         this.show = false;
       }
-      this.$store.dispatch("setTypeListAction", this.searchText);
-      // action işlemini gerçekleştir, search et ve listeye dön
+      else{
+        localStorage.setItem("inputData", this.searchText);
+        this.$store.dispatch("setTypeListAction", this.searchText);
+      }
+      this.$emit('inputText', this.searchText)
+
     },
+    onEnter(){
+      if (this.searchText != ""){
+        let vm = this
+        vm.onTyping()
+        if(this.$route.path != '/search-view'){
+          this.$router.push('/search-view')
+        }
+      }
+    }
   },
   computed: {
     ...mapGetters(["getTypeList"]),
