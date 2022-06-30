@@ -39,6 +39,9 @@
             </div>
           </div>
         </div>
+        <div v-if="data.length <= 0" class="empty-page">
+          <span>There is no such data...</span>
+        </div>
       </div>
       <div class="result-order"></div>
     </div>
@@ -237,11 +240,11 @@ h2 {
       border: 1px solid #484848;
       border-radius: 4px;
       margin-right: 10px;
+      &:hover {
+        cursor: pointer;
+      }
     }
 
-    &:hover {
-      cursor: pointer;
-    }
     &[disabled="disabled"] {
       color: silver;
       cursor: default;
@@ -269,7 +272,21 @@ h2 {
     width: 100%;
     height: 480px;
     // background-color: antiquewhite;
-
+    .empty-page {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+      span {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 20px;
+        color: #090a0a;
+      }
+    }
     .search-row {
       max-width: 726px;
       width: 100%;

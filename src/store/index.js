@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 // import request from "@/services/request2";
 Vue.use(Vuex);
-import * as timeConverting from '@/assets/js/timeConverting'
+import * as timeConverting from "@/assets/js/timeConverting";
 
 export default new Vuex.Store({
   state: {
@@ -87,7 +87,9 @@ export default new Vuex.Store({
       }
     },
     setErrorList(state, data) {
-      state.errorMessages.push(data);
+      if (!state.errorMessages.includes(data)) {
+        state.errorMessages.push(data);
+      }
     },
   },
   actions: {

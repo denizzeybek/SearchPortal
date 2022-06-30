@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="nav-home">
     <custom-button
       @clickBtn="$router.push('/add-link')"
       class="btn-nav"
@@ -19,13 +19,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-nav {
-  width: 100vw;
+.nav-home {
+  width: 98.7vw;
   display: flex;
   justify-content: flex-end;
 
   .btn-nav {
-    margin-right: 64px;
+    margin-right: 57px;
     margin-top: 64px;
   }
 }
