@@ -93,7 +93,8 @@ export default new Vuex.Store({
   actions: {
     async getDataAction({ commit }) {
       let result;
-      await fetch("http://localhost:3000/data")
+      // await fetch("http://localhost:3000/data")
+      await fetch(process.env.VUE_APP_API_URL)
         .then((response) => response.json())
         .then((json) => (result = json));
 
@@ -138,7 +139,7 @@ export default new Vuex.Store({
     },
     async saveFormAction({ commit }, data) {
       console.log("data ", data);
-      await fetch("http://localhost:3000/data", {
+      await fetch(process.env.VUE_APP_API_URL, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
