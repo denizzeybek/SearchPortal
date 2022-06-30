@@ -1,28 +1,6 @@
 <template>
   <div>
-    <nav class="search-general">
-      <div class="logo-section" @click="$router.push('/')">
-        <img src="@/assets/images/logo.png" alt="" />
-      </div>
-      <div class="search-era">
-        <searchInput
-          imgLeft="15px"
-          imgBottom="-42px"
-          widthInput="509px"
-          marginTop="25px"
-          contentMargin="0px"
-          searchBtnWidth="138px"
-        />
-      </div>
-      <div class="record-era">
-        <custom-button
-          @clickBtn="$router.push('/add-link')"
-          class="btn-nav"
-          buttonText="Add New Record"
-        />
-      </div>
-    </nav>
-
+    <custom-navigation />
     <div class="pagination-outer" style="position: relative">
       <div>
         <pagination />
@@ -34,7 +12,12 @@
           <span>Order By</span>
         </button>
         <div v-if="isOrderOpen" class="button-content" style="">
-          <span @click="order(item.prop)" v-for="item in orderDataList" :key="item.id">{{item.name}}</span> 
+          <span
+            @click="order(item.prop)"
+            v-for="item in orderDataList"
+            :key="item.id"
+            >{{ item.name }}</span
+          >
         </div>
       </div>
     </div>
@@ -42,11 +25,13 @@
 </template>
 
 <script>
+import customNavigation from "@/components/searchContainer/navigation.vue";
 import pagination from "@/components/pagination/pagination.vue";
 import customButton from "@/components/button/button.vue";
 import searchInput from "@/components/input/searchInput.vue";
 export default {
   components: {
+    customNavigation,
     pagination,
     customButton,
     searchInput,
@@ -57,19 +42,19 @@ export default {
   data() {
     return {
       isOrderOpen: false,
-      orderDataList:[
-        {name: 'Name Ascending', prop:'nameAscending'},
-        {name: 'Name Descending', prop:'nameDescending'},
-        {name: 'Year Ascending', prop:'yearAscending'},
-        {name: 'Year Descending', prop:'yearDescending'},
-      ]
+      orderDataList: [
+        { name: "Name Ascending", prop: "nameAscending" },
+        { name: "Name Descending", prop: "nameDescending" },
+        { name: "Year Ascending", prop: "yearAscending" },
+        { name: "Year Descending", prop: "yearDescending" },
+      ],
     };
   },
-  methods:{
-    order(prop){
-      this.$store.dispatch('sortListAction', prop)
-    }
-  }
+  methods: {
+    order(prop) {
+      this.$store.dispatch("sortListAction", prop);
+    },
+  },
 };
 </script>
 
@@ -78,34 +63,6 @@ export default {
   button {
     margin-top: 100px;
   }
-}
-.search-general {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-  width: 100vw;
-  .logo-section {
-    cursor: pointer;
-    margin-left: 30px;
-    img {
-      width: 149px;
-      height: 63px;
-    }
-  }
-  .search-era {
-    max-width: 700px;
-    margin-left: 95px;
-    margin-bottom: 40px;
-  }
-  .record-era {
-    margin-right: 30px;
-    margin-bottom: 5px;
-  }
-}
-
-.search-input {
-  margin-bottom: 50px;
 }
 
 .pagination-outer {
@@ -162,7 +119,7 @@ export default {
         font-weight: 500;
         font-size: 14px;
         line-height: 16px;
-        cursor:pointer;
+        cursor: pointer;
         color: #000000;
         &:hover {
           background: #b3b3b3;
@@ -171,12 +128,6 @@ export default {
         }
       }
     }
-  }
-}
-
-@media only screen and (max-width: 1281px) {
-  .search-era {
-    margin-left: 60px !important;
   }
 }
 </style>

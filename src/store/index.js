@@ -2,49 +2,14 @@ import Vue from "vue";
 import Vuex from "vuex";
 // import request from "@/services/request2";
 Vue.use(Vuex);
-
-function sortData(arr, prop) {
-  let sortedarr = arr.sort((a, b) => {
-    if (a[prop] < b[prop]) {
-      return -1;
-    }
-    if (a[prop] > b[prop]) {
-      return 1;
-    }
-    return 0;
-  });
-  return sortedarr;
-}
-
-function convertTimeSpan(bigData) {
-  bigData.map((a) => {
-    let date = new Date(a.Date);
-    let timeSpan = date.getTime();
-    a.Date = timeSpan;
-  });
-  return bigData;
-}
-
-function convertTime(bigData) {
-  bigData.map((a) => {
-    let date = new Date(a.Date);
-    let converted =
-      (date.getMonth() > 8
-        ? date.getMonth() + 1
-        : "0" + (date.getMonth() + 1)) +
-      "/" +
-      (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
-      "/" +
-      date.getFullYear();
-    a.Date = converted;
-  });
-  return bigData;
-}
+import * as timeConverting from '@/assets/js/timeConverting'
 
 export default new Vuex.Store({
   state: {
     userData: [],
     typeList: [],
+    hasError: false,
+    errorMessages: [],
   },
   getters: {
     getTypeList(state) {
@@ -52,6 +17,12 @@ export default new Vuex.Store({
     },
     getUserData(state) {
       return state.userData;
+    },
+    getError(state) {
+      return state.hasError;
+    },
+    getErrorList(state) {
+      return state.errorMessages;
     },
   },
   mutations: {
@@ -76,7 +47,7 @@ export default new Vuex.Store({
         state.typeList = res;
         localStorage.setItem("inputData", data);
       } else {
-        console.log("here")
+        console.log("here");
         state.typeList = state.userData;
       }
     },
@@ -87,27 +58,36 @@ export default new Vuex.Store({
       switch (data) {
         case "nameAscending":
           // console.log("bigData ", bigData);
-          newArr = sortData(bigData, "NameSurname");
+          newArr = timeConverting.sortData(bigData, "NameSurname");
           state.typeList = newArr;
           break;
         case "nameDescending":
-          newArr = sortData(bigData, "NameSurname");
+          newArr = timeConverting.sortData(bigData, "NameSurname");
           state.typeList = newArr.reverse();
 
           break;
         case "yearAscending":
-          bigData = convertTimeSpan(bigData);
-          bigData = sortData(bigData, "Date");
-          bigData = convertTime(bigData);
+          bigData = timeConverting.convertTimeSpan(bigData);
+          bigData = timeConverting.sortData(bigData, "Date");
+          bigData = timeConverting.convertTime(bigData);
           break;
         case "yearDescending":
-          bigData = convertTimeSpan(bigData);
-          bigData = sortData(bigData, "Date");
-          bigData = convertTime(bigData).reverse();
+          bigData = timeConverting.convertTimeSpan(bigData);
+          bigData = timeConverting.sortData(bigData, "Date");
+          bigData = timeConverting.convertTime(bigData).reverse();
           break;
         default:
         // code block
       }
+    },
+    setHasError(state, data) {
+      state.hasError = data;
+      if (data === false) {
+        state.errorMessages = [];
+      }
+    },
+    setErrorList(state, data) {
+      state.errorMessages.push(data);
     },
   },
   actions: {
@@ -127,9 +107,7 @@ export default new Vuex.Store({
           let newArr = [];
           newArr.push(month, day, year);
           let newDate = newArr.join("/");
-          // a.Date = new Date(newDate);
           a.Date = newDate;
-          //TODO:: burda sıkıntı var
           return a;
         });
 
@@ -151,6 +129,24 @@ export default new Vuex.Store({
     },
     sortListAction({ commit }, data) {
       commit("setSortedList", data);
+    },
+    setErrorAction({ commit }, data) {
+      commit("setHasError", data);
+    },
+    setErrorMessagesAction({ commit }, data) {
+      commit("setErrorList", data);
+    },
+    async saveFormAction({ commit }, data) {
+      console.log("data ", data);
+      await fetch("http://localhost:3000/data", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
     },
   },
   modules: {},

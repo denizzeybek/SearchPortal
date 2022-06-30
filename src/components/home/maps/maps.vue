@@ -1,31 +1,31 @@
 <template>
   <div class="maps-section">
-      <div class="map-banner">
-        <img src="@/assets/images/mapBanner.png" alt="" />
-        <div class="map-content">
-          <span class="contact">İletişim</span>
-          <span class="address"
-            >Adres: Çifte Havuzlar Mah. Eski Londra Asfaltı Cad. Kuluçka Merkezi
-            D2 Blok No: 151/1F İç Kapı No: 2B03 Esenler/İstanbul Email:
-            bilgi@tesodev.com</span
-          >
-          <span class="email">Email: bilgi@tesodev.com</span>
-        </div>
-      </div>
-
-      <div class="real-map">
-          <map-geo/>
+    <div class="map-banner">
+      <img src="@/assets/images/mapBanner.png" alt="" />
+      <div class="map-content">
+        <span class="contact">İletişim</span>
+        <span class="address"
+          >Adres: Çifte Havuzlar Mah. Eski Londra Asfaltı Cad. Kuluçka Merkezi
+          D2 Blok No: 151/1F İç Kapı No: 2B03 Esenler/İstanbul Email:
+          bilgi@tesodev.com</span
+        >
+        <span class="email">Email: bilgi@tesodev.com</span>
       </div>
     </div>
+
+    <div class="real-map">
+      <map-geo />
+    </div>
+  </div>
 </template>
 
 <script>
-import mapGeo from '@/components/home/maps/mapGeo.vue'
-export default{
-  components:{
-    mapGeo
+import mapGeo from "@/components/home/maps/mapGeo.vue";
+export default {
+  components: {
+    mapGeo,
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -55,14 +55,26 @@ export default{
 
       font-family: "Roboto";
       font-style: normal;
-      font-weight: 700;
       font-size: 18px;
       line-height: 21px;
 
       color: #ffffff;
-    }
-    .address {
-      margin-bottom: 50px;
+      .contact {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21px;
+
+        color: #ffffff;
+      }
+      .address {
+        font-weight:400;
+      }
+      .address {
+        font-weight:400;
+        margin-bottom: 50px;
+      }
     }
   }
 
