@@ -1,14 +1,11 @@
 <template>
-  <div class="home">
-    <search-container/>
-  </div>
+    <search-container />
 </template>
 
 <script>
 import SearchContainer from '@/containers/SearchContainer.vue'
 
 export default {
-  name: 'HomeView',
   components: {
     SearchContainer
   }
