@@ -14,7 +14,6 @@
         <formInput :formElements="formElements" />
       </div>
       <div v-if="getError" class="toastr-overall">
-        <!-- TODO: errorleri listeden çek, input altında göster, toastr ı düzenle -->
         <a @click="closeToastr" href="#">
           <img src="@/assets/images/cross.png" alt="cross" />
         </a>

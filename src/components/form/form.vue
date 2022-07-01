@@ -21,6 +21,7 @@
 import customButton from "@/components/button/button.vue";
 import customInput from "@/components/form/formInput.vue";
 import uuid4 from "@/assets/js/uuid4";
+import textValidation from "@/assets/js/textValidation";
 
 export default {
   props: {
@@ -51,13 +52,14 @@ export default {
     };
   },
   methods: {
+    //TODO: form validation yaparken text inputlar sadece text ve 4-60 karakter eklenecek
     submitForm() {
       this.hasError = false;
       let name = this.formText.name;
       let nameArr = name.split(" ");
       let nameArr2 = nameArr.filter((word) => word !== "");
       let length = nameArr2.length;
-      if (length <= 1) {
+      if (length <= 1 || !textValidation(this.formText.name)) {
         document.querySelector("#label-nameText").classList.add("error");
         document.querySelector("#nameText").classList.add("error");
         this.$store.dispatch("setErrorMessagesAction", this.errors[0]);
@@ -72,14 +74,15 @@ export default {
         this.$store.dispatch("setErrorMessagesAction", this.errors[1]);
         this.hasError = true;
       }
-      if (this.formText.country == "") {
+      if (
+        this.formText.country == "" || !textValidation(this.formText.country)
+      ) {
         document.querySelector("#label-countryText").classList.add("error");
         document.querySelector("#countryText").classList.add("error");
         this.$store.dispatch("setErrorMessagesAction", this.errors[3]);
-
         this.hasError = true;
       }
-      if (this.formText.city == "") {
+      if (this.formText.city == "" || !textValidation(this.formText.city)) {
         document.querySelector("#label-cityText").classList.add("error");
         document.querySelector("#cityText").classList.add("error");
         this.$store.dispatch("setErrorMessagesAction", this.errors[2]);
@@ -194,16 +197,16 @@ export default {
     margin-right: 6px;
   }
 }
-@media (max-width:414px){
-  .form-section{
+@media (max-width: 414px) {
+  .form-section {
     max-width: 414px;
   }
-  .input-inner{
-    display:flex;
-    justify-content:center;
+  .input-inner {
+    display: flex;
+    justify-content: center;
   }
-  .input-outer{
-    padding:0 20px 0 20px;
+  .input-outer {
+    padding: 0 20px 0 20px;
   }
 }
 </style>

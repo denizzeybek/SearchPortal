@@ -270,6 +270,9 @@ export default {
   .inner{
     margin-left: 72px !important;
   }
+  // .card-content{
+  //   img{min-width:600px !important;}
+  // }
 }
 @media (max-width: 1281px) {
   .btn-next {
