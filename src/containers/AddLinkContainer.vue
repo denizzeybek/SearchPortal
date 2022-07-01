@@ -184,5 +184,8 @@ nav {
       font-size:18px !important;
     }
   }
+.toastr-overall{
+  right:0;
+}
 }
 </style>
