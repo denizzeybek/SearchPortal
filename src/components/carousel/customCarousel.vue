@@ -263,7 +263,15 @@ export default {
     top: 90px;
   }
 }
-@media only screen and (max-width: 1281px) {
+@media (max-width:414px){
+  .carousel{
+    margin:0 !important;
+  }
+  .inner{
+    margin-left: 72px !important;
+  }
+}
+@media (max-width: 1281px) {
   .btn-next {
     position: absolute;
     right: -10px !important;
@@ -272,24 +280,24 @@ export default {
     margin-left: 0px !important;
   }
   .inner{
-    margin-left:230px !important;
+    margin-left:218px !important;
   }
 }
 
-@media only screen and (max-width: 1441px) {
+@media (max-width: 1441px) {
   .carousel{
     width:88.5vw !important;
   }
   .inner{
-    margin-left:220px !important;
+    margin-left:220px ;
   }
   .carousel-outer {
     margin-left: 100px;
   }
 }
-@media only screen and (min-width: 1919px) {
+@media (min-width: 1919px) {
   .inner {
-    margin-left: 305px !important;
+    margin-left: 305px ;
   }
 }
 /* optional */

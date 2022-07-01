@@ -130,4 +130,9 @@ export default {
     }
   }
 }
+@media (max-width:414px){
+  .sorting-outer{
+    right:160px !important;
+  }
+}
 </style>

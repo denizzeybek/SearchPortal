@@ -375,4 +375,12 @@ h2 {
     }
   }
 }
+@media (max-width:414px){
+  .result-content{
+    margin-top:30px;
+  }
+  .pagination{
+    margin-bottom:30px !important;
+  }
+}
 </style>

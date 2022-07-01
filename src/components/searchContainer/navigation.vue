@@ -66,7 +66,34 @@ export default {
 
 @media only screen and (max-width: 1281px) {
   .search-era {
-    margin-left: 60px !important;
+    margin-left: 60px ;
+  }
+}
+@media (max-width: 414px) {
+  .search-general {
+    flex-direction: column;
+    .logo-section {
+    }
+    .search-era {
+      margin-left:0 !important;
+      margin-right:40px;
+      margin-bottom:10px;
+      max-width:400px;
+      .search-section {
+        margin:0;
+        .search-content {
+          .search-input{
+            img{}
+            input{
+              max-width:350px;
+              width:350px;
+            }
+          }
+        }
+      }
+    }
+    .record-era {
+    }
   }
 }
 </style>

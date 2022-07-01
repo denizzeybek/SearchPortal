@@ -194,4 +194,16 @@ export default {
     margin-right: 6px;
   }
 }
+@media (max-width:414px){
+  .form-section{
+    max-width: 414px;
+  }
+  .input-inner{
+    display:flex;
+    justify-content:center;
+  }
+  .input-outer{
+    padding:0 20px 0 20px;
+  }
+}
 </style>

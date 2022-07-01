@@ -6,7 +6,9 @@
 
     <div class="news-carousel">
       <custom-carousel :cardNumber="4" v-if="windowWidth >= 1620"/>
-      <custom-carousel v-else/>
+      <custom-carousel :cardNumber="3" v-else-if="windowWidth >= 1280"/>
+      <custom-carousel :cardNumber="2" v-else-if="windowWidth >= 768"/>
+      <custom-carousel :cardNumber="1" v-else/>
     </div>
   </div>
 </template>

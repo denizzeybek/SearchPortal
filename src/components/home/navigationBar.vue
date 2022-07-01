@@ -27,6 +27,19 @@ export default {
   .btn-nav {
     margin-right: 57px;
     margin-top: 64px;
+    margin-left: 110px;
+    margin-bottom: 10px;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .nav-home {
+    flex-direction: column;
+    justify-content: center !important;
+
+    .btn-nav {
+      margin-right: 0px !important;
+      margin-top: 64px;
+    }
   }
 }
 </style>

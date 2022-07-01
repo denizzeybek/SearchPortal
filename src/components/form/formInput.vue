@@ -42,4 +42,9 @@ input {
     border: 1.5px solid rgba(72, 72, 72, 0.6);
   }
 }
+@media (max-width: 414px) {
+  input {
+    max-width: 350px;
+  }
+}
 </style>

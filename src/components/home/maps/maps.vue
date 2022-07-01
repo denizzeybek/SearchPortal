@@ -85,4 +85,28 @@ export default {
     margin-bottom: 30px;
   }
 }
+
+@media (max-width:414px){
+  .maps-section{
+      flex-direction: column;
+      max-width:414px;
+      height:120%;
+    .map-banner{
+      padding:20px 0 20px 0;
+      flex-direction: column;
+      img{}
+      .map-content{
+        max-width:390px;
+        padding:10px 30px 10px 30px;
+        .contact{}
+        .address{}
+        .email{}
+      }
+    }
+    .real-map{
+      max-width:350px;
+      margin:0 0 80px 0;
+    }
+  }
+}
 </style>
