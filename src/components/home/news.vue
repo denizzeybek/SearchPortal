@@ -5,19 +5,46 @@
     </div>
 
     <div class="news-carousel">
-      <custom-carousel/>
+      <custom-carousel :cardNumber="4" v-if="windowWidth >= 1620"/>
+      <custom-carousel :cardNumber="3" v-else-if="windowWidth >= 1280"/>
+      <custom-carousel :cardNumber="2" v-else-if="windowWidth >= 768"/>
+      <custom-carousel :cardNumber="1" v-else/>
     </div>
   </div>
 </template>
 
  <script>
- import customCarousel from '@/components/carousel/customCarousel.vue'
- export default{
-  components:{
-    customCarousel
-  }
- }
- </script>
+import customCarousel from "@/components/carousel/customCarousel.vue";
+export default {
+  components: {
+    customCarousel,
+  },
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  },
+  methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+  },
+  watch: {
+    windowWidth(newWidth, oldWidth) {
+      console.log("window.innerWidth ", newWidth);
+      // this.windowWidth = window.innerWidth;
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
+};
+</script>
 
 <style scoped lang="scss">
 .news-section {
@@ -39,9 +66,8 @@
     width: 100%;
     // background-color: antiquewhite;
     height: 385px;
-    display:flex;
+    display: flex;
     justify-content: center;
   }
 }
-
 </style>

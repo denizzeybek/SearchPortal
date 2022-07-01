@@ -4,9 +4,16 @@
       <span>Find in records</span>
     </div>
 
-    <search-input @inputText="setInputText"/>
+    <search-input @inputText="setInputText" />
 
-    <div v-if="(getTypeList.length > 1 ? true : false) && (inputText != '') && (inputText.length > 1)" class="search-list">
+    <div
+      v-if="
+        (getTypeList.length > 1 ? true : false) &&
+        inputText != '' &&
+        inputText.length > 1
+      "
+      class="search-list"
+    >
       <div
         v-for="index in getTypeList.slice(0, 3)"
         :key="index.id"
@@ -51,13 +58,13 @@ export default {
   },
   data() {
     return {
-      inputText:''
+      inputText: "",
     };
   },
-  methods:{
-    setInputText(event){
-      this.inputText = event
-    }
+  methods: {
+    setInputText(event) {
+      this.inputText = event;
+    },
   },
   computed: {
     ...mapGetters(["getTypeList"]),
@@ -150,6 +157,19 @@ export default {
         cursor: pointer;
       }
     }
+  }
+}
+
+@media (max-width: 420px) {
+  .search-header {
+    max-width: 414px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .search-list {
+    max-width: 414px;
+    margin-left: 16px !important; 
   }
 }
 </style>

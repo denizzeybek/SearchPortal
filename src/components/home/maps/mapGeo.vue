@@ -6,9 +6,11 @@
       style="width: 470px; height: 222px; margin: 32px auto"
       ref="mapRef"
       @dragend="handleDrag"
+      class="map-provider"
     ></GmapMap>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -73,3 +75,12 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@media (max-width:414px){
+  .map-provider{
+    max-width:350px;
+    margin:0;
+  }
+}
+</style>

@@ -12,11 +12,7 @@
       />
     </div>
     <div class="button-section">
-      <custom-button
-        @click="$emit('showErrorX', hasError)"
-        buttonText="Add"
-        @clickBtn="submitForm"
-      />
+      <custom-button buttonText="Add" @clickBtn="submitForm" />
     </div>
   </div>
 </template>
@@ -35,7 +31,7 @@ export default {
   components: {
     customButton,
     customInput,
-  }, 
+  },
   data() {
     return {
       formText: {
@@ -112,7 +108,18 @@ export default {
           City: this.formText.city,
           Date: converted,
         };
-        this.$store.dispatch("saveFormAction", postObj);
+        this.$store
+          .dispatch("saveFormAction", postObj)
+          .then((res) => {
+            document.getElementById("nameText").value = "";
+            document.getElementById("countryText").value = "";
+            document.getElementById("cityText").value = "";
+            document.getElementById("emailText").value = "";
+          })
+          .catch((e) => {
+            this.hasError = true;
+            console.log("error::", e);
+          });
       }
     },
     bindInputData($event) {
@@ -185,6 +192,18 @@ export default {
     display: flex;
     justify-content: flex-end;
     margin-right: 6px;
+  }
+}
+@media (max-width:414px){
+  .form-section{
+    max-width: 414px;
+  }
+  .input-inner{
+    display:flex;
+    justify-content:center;
+  }
+  .input-outer{
+    padding:0 20px 0 20px;
   }
 }
 </style>

@@ -2,7 +2,12 @@
   <div class="carousel-outer">
     <div class="carousel">
       <div class="inner" ref="inner" :style="innerStyles">
-        <div class="card" v-for="card in cards.slice(0, 3)" :key="card.id">
+        <!-- <div class="card" v-for="card in cards.slice(0, 4)" :key="card.id"> -->
+        <div
+          class="card"
+          v-for="card in cards.slice(0, cardNumber)"
+          :key="card.id"
+        >
           <div class="card-content">
             <!-- <img :src="card.img" /> -->
             <!-- <img :src="`/img/image${card.id}.png`" /> -->
@@ -28,6 +33,9 @@
 
 <script>
 export default {
+  props: {
+    cardNumber: { type: Number, default: 3 },
+  },
   data() {
     return {
       cards: [
@@ -255,7 +263,15 @@ export default {
     top: 90px;
   }
 }
-@media only screen and (max-width: 1281px) {
+@media (max-width:414px){
+  .carousel{
+    margin:0 !important;
+  }
+  .inner{
+    margin-left: 72px !important;
+  }
+}
+@media (max-width: 1281px) {
   .btn-next {
     position: absolute;
     right: -10px !important;
@@ -263,11 +279,25 @@ export default {
   .carousel-outer {
     margin-left: 0px !important;
   }
+  .inner{
+    margin-left:218px !important;
+  }
 }
 
-@media only screen and (max-width: 1441px) {
+@media (max-width: 1441px) {
+  .carousel{
+    width:88.5vw !important;
+  }
+  .inner{
+    margin-left:220px ;
+  }
   .carousel-outer {
     margin-left: 100px;
+  }
+}
+@media (min-width: 1919px) {
+  .inner {
+    margin-left: 305px ;
   }
 }
 /* optional */

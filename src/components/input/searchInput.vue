@@ -1,8 +1,12 @@
 <template>
   <div class="search-section">
-    <div class="search-content" :style="{marginLeft:contentMargin}">
+    <div class="search-content" :style="{ marginLeft: contentMargin }">
       <div class="search-input">
-        <img :style="{bottom:imgBottom, left:imgLeft}" src="@/assets/images/search.png" class="search-img" />
+        <img
+          :style="{ bottom: imgBottom, left: imgLeft }"
+          src="@/assets/images/search.png"
+          class="search-img"
+        />
         <input
           @keyup="onTyping"
           v-model="searchText"
@@ -26,7 +30,7 @@
         buttonText="Search"
         :btnWidth="searchBtnWidth"
         :style="{ marginTop: marginTop }"
-        :disabledProp=" (searchText.length > 1 ? false : true)"
+        :disabledProp="searchText.length > 1 ? false : true"
       />
     </div>
   </div>
@@ -46,33 +50,33 @@ export default {
       type: String,
       default: () => "0px",
     },
-    imgBottom:{
+    imgBottom: {
       type: String,
       default: () => "-6px",
     },
-    imgLeft:{
+    imgLeft: {
       type: String,
       default: () => "35px",
     },
-    contentMargin:{
+    contentMargin: {
       type: String,
       default: () => "210px",
     },
-    searchBtnWidth:{
+    searchBtnWidth: {
       type: String,
       default: () => "200px",
-    }
+    },
   },
   components: {
     customButton,
   },
-  async mounted(){
+  async mounted() {
     await this.$store.dispatch("getDataAction");
-    let stored = localStorage.getItem('inputData') 
-    if(stored != null){
-      this.searchText = stored
+    let stored = localStorage.getItem("inputData");
+    if (stored != null) {
+      this.searchText = stored;
       this.$store.dispatch("setTypeListAction", this.searchText);
-      this.$emit('inputText', this.searchText)
+      this.$emit("inputText", this.searchText);
     }
   },
   data() {
@@ -83,28 +87,26 @@ export default {
   },
   methods: {
     onTyping() {
-      if(this.searchText.length > 2){
+      if (this.searchText.length > 2) {
         this.show = true;
       }
       if (this.searchText === "") {
         this.show = false;
-      }
-      else{
+      } else {
         localStorage.setItem("inputData", this.searchText);
         this.$store.dispatch("setTypeListAction", this.searchText);
       }
-      this.$emit('inputText', this.searchText)
-
+      this.$emit("inputText", this.searchText);
     },
-    onEnter(){
-      if (this.searchText != ""){
-        let vm = this
-        vm.onTyping()
-        if(this.$route.path != '/search-view'){
-          this.$router.push('/search-view')
+    onEnter() {
+      if (this.searchText != "") {
+        let vm = this;
+        vm.onTyping();
+        if (this.$route.path != "/search-view") {
+          this.$router.push("/search-view");
         }
       }
-    }
+    },
   },
   computed: {
     ...mapGetters(["getTypeList"]),
@@ -148,6 +150,29 @@ export default {
     }
     .btn-search {
       margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .search-section {
+    margin-right: 30px;
+    .search-content {
+      max-width: 414px !important;
+      display: flex;
+      flex-direction: column;
+      margin: 0 !important;
+      .search-input {
+        max-width: 300px !important;
+        margin-bottom: 10px;
+        input {
+          max-width: 300px !important;
+        }
+        .search-img {
+          bottom: -42px !important;
+          left: 19px !important;
+        }
+      }
     }
   }
 }

@@ -178,4 +178,11 @@ nav {
     color: #090a0a;
   }
 }
+@media (max-width:414px){
+  .return-section{
+    span{
+      font-size:18px !important;
+    }
+  }
+}
 </style>
